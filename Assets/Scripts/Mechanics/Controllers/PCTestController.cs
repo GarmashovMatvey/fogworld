@@ -46,22 +46,7 @@ namespace RW.Mechanics.Controllers
 				_moveDirection -= _trackedBody.transform.right;
 			}
 			_jumpRequired = Input.GetButton("Jump") && _isGrounded;
-
-			Vector3 curMousePosition = Input.mousePosition;
-			Vector3 delta = curMousePosition - _previousMousePosition;
-			delta.Normalize();
-
-			Vector3 origRotation = _trackedBody.rotation.eulerAngles;
-			if (delta.x < 0)
-			{
-				_trackedBody.rotation = Quaternion.Euler(origRotation.x, origRotation.y - _rotationSpeed * Time.deltaTime, origRotation.z);
-			}
-			else if (delta.x > 0)
-			{
-				_trackedBody.rotation = Quaternion.Euler(origRotation.x, origRotation.y + _rotationSpeed * Time.deltaTime, origRotation.z);
-			}
-
-			_previousMousePosition = curMousePosition;
+			
 		}
 
 		private void OnCollisionEnter(Collision collision)
@@ -84,8 +69,8 @@ namespace RW.Mechanics.Controllers
 
 		private void FixedUpdate()
 		{
-			if(_jumpRequired)
-				_trackedBody.velocity += Vector3.up * Mathf.Sqrt(-2f * Physics.gravity.y * _jumpHeight);
+			if (_jumpRequired)
+				//_trackedBody.AddForce(Vector3.up * _jumpHeight * _trackedBody.mass, ForceMode.Impulse);
 
 			_isGrounded = false;
 			_motor.Update();
