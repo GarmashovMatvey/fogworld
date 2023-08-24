@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1309,7 +1309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027006018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.27, y: 2.15, z: 2.75}
+  m_LocalPosition: {x: -5.27, y: 5.3, z: 2.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1350,6 +1350,40 @@ MonoBehaviour:
   _speed: 10
   _rotationSpeed: 600
   _jumpHeight: 1
+  _jumpTime: 1
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.0137093
+      outSlope: 2.0137093
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.49837488
+      value: 1.0035821
+      inSlope: -0.00052952766
+      outSlope: -0.00052952766
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: -0.0070762634
+      inSlope: -2.0147684
+      outSlope: -2.0147684
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1041034847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,8 +1429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e036f5e876d54b92a0058328bf43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensivity: 20
-  playerBody: {fileID: 1027006022}
+  _sensivity: 20
+  _playerBody: {fileID: 1027006022}
 --- !u!1 &1048351171
 GameObject:
   m_ObjectHideFlags: 0

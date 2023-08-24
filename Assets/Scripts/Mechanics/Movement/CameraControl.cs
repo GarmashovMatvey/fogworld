@@ -1,30 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+namespace RW.Mechanics.Movement
 {
-    [SerializeField] private float sensivity = 100f;
-    [SerializeField] private Transform playerBody;
-
-    private float xRotation = 0f;
-
-    void Start()
+    public sealed class CameraControl : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        [SerializeField] private float _sensivity = 100f;
+        [SerializeField] private Transform _playerBody;
 
-    // Update is called once per frame
-    void Update()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * sensivity;
-        float mouseY = Input.GetAxis("Mouse Y") * sensivity;
+        private float _xRotation = 0f;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        
-        transform.localRotation = Quaternion.Euler(xRotation, 0f,0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+		private void Update()
+        {
+            float mouseX = Input.GetAxis("Mouse X") * _sensivity;
+            float mouseY = Input.GetAxis("Mouse Y") * _sensivity;
+
+            _xRotation -= mouseY;
+            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+
+            transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            _playerBody.Rotate(Vector3.up * mouseX);
+        }
     }
 }

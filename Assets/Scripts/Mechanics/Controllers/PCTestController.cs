@@ -1,4 +1,5 @@
 ﻿using RW.Mechanics.Movement;
+using System.Collections;
 using UnityEngine;
 
 namespace RW.Mechanics.Controllers
@@ -12,7 +13,6 @@ namespace RW.Mechanics.Controllers
 		[SerializeField] private float _jumpHeight;
 
 		private bool _isGrounded = false;
-		private Vector3 _previousMousePosition;
 		private Vector3 _moveDirection;
 		private Motor _motor;
 		private bool _jumpRequired;
@@ -22,7 +22,6 @@ namespace RW.Mechanics.Controllers
 		private void Start()
 		{
 			_motor = new Motor(_trackedBody, ForceFactory.CreateMovementForce(this), _speed);
-			_previousMousePosition = Input.mousePosition;
 		}
 
 		private void Update()
@@ -45,8 +44,8 @@ namespace RW.Mechanics.Controllers
 			{
 				_moveDirection -= _trackedBody.transform.right;
 			}
+
 			_jumpRequired = Input.GetButton("Jump") && _isGrounded;
-			
 		}
 
 		private void OnCollisionEnter(Collision collision)
@@ -67,10 +66,22 @@ namespace RW.Mechanics.Controllers
 			}
 		}
 
+#if UNITY_EDITOR
+		private void OnValidate()
+		{
+			_jumpHeight = Mathf.Max(0f, _jumpHeight);
+			_speed = Mathf.Max(0f, _speed);
+		}
+#endif
+
 		private void FixedUpdate()
 		{
+
 			if (_jumpRequired)
-				//_trackedBody.AddForce(Vector3.up * _jumpHeight * _trackedBody.mass, ForceMode.Impulse);
+			{
+				_trackedBody.AddForce(Mathf.Sqrt(_jumpHeight * -1f * Physics.gravity.y) * Vector3.up, ForceMode.Impulse);
+				_jumpRequired = false;
+			}
 
 			_isGrounded = false;
 			_motor.Update();
